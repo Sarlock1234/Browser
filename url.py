@@ -13,14 +13,13 @@ class URL:
             s = ctx.wrap_socket(s, server_hostname=self.host)
             self.port = 443
 
-        if ":" in self.host:
-            self.host, port = self.host.split(":", 1)
-            self.port = int(port)
-
         if "/" not in url:
             url = url+"/"
         self.host, url = url.split("/", 1)
         self.path = "/" + url
+        if ":" in self.host:
+            self.host, port = self.host.split(":", 1)
+            self.port = int(port)
     
     #Now to download the web page at that url
     def request(self):
