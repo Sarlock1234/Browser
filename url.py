@@ -48,7 +48,8 @@ class URL:
         return body
     
 #Now to display the actual HTML body
-def show(body):
+def lex(body):
+    text = ""
     in_tag = False
     for c in body:
         if c == "<":
@@ -56,10 +57,5 @@ def show(body):
         elif c == ">":
             in_tag = False
         elif not in_tag:
-            print(c, end="")
-def load(url):
-    body = url.request()
-    show(body)
-if __name__ == "__main__":
-    import sys
-    load(URL(sys.argv[1]))
+            text += c
+    return text
