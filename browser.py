@@ -1,6 +1,6 @@
 import tkinter
 import url
-
+import tkinter.font
 
 SCROLL_STEP = 100
 WIDTH, HEIGHT = 800, 600 #Setting width and height of the window
@@ -20,6 +20,7 @@ def layout(text):
             cursor_y += VSTEP
             cursor_x = HSTEP
     return display_list
+
 class Browser:
     def __init__(self):
         self.window = tkinter.Tk()
@@ -32,6 +33,12 @@ class Browser:
         self.scroll = 0
         self.window.bind("<Down>", self.scrolldown)
         self.window.bind("<Up>", self.scrollup)
+        self.bi_times = tkinter.font.Font(
+            family = "Times",
+            size = 16,
+            weight="bold",
+            slant="italic",
+        )
     
 
     def draw(self):
@@ -39,7 +46,7 @@ class Browser:
         for x,y,c in self.display_list:
             if y > self.scroll + HEIGHT: continue
             if y + VSTEP < self.scroll: continue
-            self.canvas.create_text(x, y-self.scroll, text=c)
+            self.canvas.create_text(x, y-self.scroll, text=c, font=self.bi_times)
     
     def scrolldown(self, e):
         self.scroll += SCROLL_STEP
